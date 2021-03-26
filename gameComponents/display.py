@@ -2,57 +2,121 @@
 # 
 # - standardize at 80 characters wide
 # 
-# LINE
-# - print a line of text capped with "|"
-# BORDER
-# - print a horizontal line
-# LIVES
-# - print lives
-# GAME
-# - print the whole rock paper scissors game
+# PREREQUISITES
+# BASICS
+# - line()
+#   - display a line of text capped with "|" at the ends
+# - border()
+#   - display a horizontal line
+# - welcome()
+#   - display welcome message
+# - round()
+#   - display current round count
+# - lives()
+#   - display current lives counts
+# PLAYER INPUT
+# - choice()
+# GAME ROUND
+# - gameRound()
+# VICTORY
+# - victory()
+# Line
+# Line
 
+#-----------------------------------------------------------------------
+
+# PREREQUISITES
 
 # used for animation timing
 import time
 
-from gameComponents import gameVars
+# golbal variables for later
+rock = "    R O C K    "
+paper = "   P A P E R   "
+scissors = "S C I S S O R S"
+win_you = "       Y O U   W I N       "
+win_comp = " C O M P U T E R   W I N S "
+tie_game = "      T I E   G A M E      "
+
+#-----------------------------------------------------------------------
+
+# BASICS
 
 def line(content):
   return("| " + content + (" " * ( 76 - len(content) )) + " |")
 
 def border():
-  return(".==============================================================================.")
+  return("|==============================================================================|")
 
-def lives():
+def welcome():
   print(
+    border(),
     line(""),
-    line("Computer Lives: "+ str(gameVars.computer_lives) +"/"+ str(gameVars.total_lives)),
-    line("Player Lives: "+ str(gameVars.player_lives) +"/"+ str(gameVars.total_lives)),
-    line(""),
+    line("Welcome to Rock Paper Scissors!"),
     sep='\n')
 
-def round(player_choice, computer_choice, win_state):
+def round(round_num,user_wins,comp_wins):
+  print(
+    line(""),
+    line("Round: "+str(round_num)),
+    line(""),
+    line("User Wins: "+str(user_wins)),
+    line("Computer Wins: "+str(comp_wins)),
+    sep='\n')
 
-  rock = "    R O C K    "
-  paper = "   P A P E R   "
-  scissors = "S C I S S O R S"
+def lives(computer_lives,player_lives,total_lives):
+  print(
+    line(""),
+    line("Computer Lives: "+ str(computer_lives) +"/"+ str(total_lives)),
+    line("Player Lives: "+ str(player_lives) +"/"+ str(total_lives)),
+    line(""),
+    sep='\n')
+  time.sleep(.800)
 
-  # format player choice
-  if (player_choice == 1):
-    player_choice = rock
-  elif (player_choice == 2):
-    player_choice = paper
-  elif (player_choice == 3):
-    player_choice = scissors
+#-----------------------------------------------------------------------
 
-  # format computer choice
-  if (computer_choice == 1):
-    computer_choice = rock
-  elif (computer_choice == 2):
-    computer_choice = paper
-  elif (computer_choice == 3):
-    computer_choice = scissors
+# PLAYER INPUT
 
+def choice(prompt):
+  print(
+    line(""),
+    line(prompt),
+    line(""),
+    line("  Type '1' or 'r' for Rock"),
+    line("  Type '2' or 'p' for Paper"),
+    line("  Type '3' or 's' for Scissors"),
+    line(""),
+    line("  Or submit nothing to exit"),
+    sep='\n')
+
+  player_choice = input("| -> ")
+
+  if (player_choice == ""):
+    quit()
+
+  elif (player_choice[0] == "R" or 
+    player_choice[0] == "r" or
+    player_choice == "1"):
+    return 1
+
+  elif (player_choice[0] == "P" or 
+    player_choice[0] == "p" or
+    player_choice == "2"):
+    return 2
+
+  elif (player_choice[0] == "S" or 
+    player_choice[0] == "s" or
+    player_choice == "3"):
+    return 3
+
+  else:
+    return choice("Sorry, didn't understand '"+ player_choice+"'")
+
+#-----------------------------------------------------------------------
+
+# GAME ROUND
+
+def gameAnimation():
 
   def dramatic_pause():
     pause_length = .400
@@ -108,7 +172,38 @@ def round(player_choice, computer_choice, win_state):
 
   time.sleep(.800)
 
-  # ANNOUNCE WINNER
+def gameRound(player_choice, computer_choice, winner):
+
+  # Display Animation
+
+  gameAnimation()
+
+  # Announce Winner
+
+  # format player choice
+  if (player_choice == 1):
+    player_choice = rock
+  elif (player_choice == 2):
+    player_choice = paper
+  elif (player_choice == 3):
+    player_choice = scissors
+
+  # format computer choice
+  if (computer_choice == 1):
+    computer_choice = rock
+  elif (computer_choice == 2):
+    computer_choice = paper
+  elif (computer_choice == 3):
+    computer_choice = scissors
+
+  # format winner
+
+  if (winner == 0):
+    winner = win_comp
+  elif (winner == 1):
+    winner = win_you
+  elif (winner == 2):
+    winner = tie_game
 
   print(
     line(""),
@@ -142,17 +237,6 @@ def round(player_choice, computer_choice, win_state):
 
   time.sleep(.800)
 
-  win_you = "       Y O U   W I N       "
-  win_comp = " C O M P U T E R   W I N S "
-  tie_game = "      T I E   G A M E      "
-
-  if (win_state == 0):
-    winner = win_comp
-  elif (win_state == 1):
-    winner = win_you
-  elif (win_state == 2):
-    winner = tie_game
-
   print(
     line(""),
     line("    - - - - - - - - - - - - -  "),
@@ -162,21 +246,23 @@ def round(player_choice, computer_choice, win_state):
 
   time.sleep(.800)
 
-  lives()
+#-----------------------------------------------------------------------
 
-  time.sleep(.800)
+# VICTORY
 
-def victory(win_state):
+def victory(winner):
 
   win_you = "       Y O U   W I N       "
   win_comp = " C O M P U T E R   W I N S "
 
-  if (win_state == 0):
+  if (winner == 0):
     winner = win_comp
     message = "You are out of lives!"
-  elif (win_state == 1):
+  elif (winner == 1):
     winner = win_you
     message = "Computer is out of lives!"
+
+  time.sleep(.800)
 
   print(
     line(message),
@@ -187,3 +273,7 @@ def victory(win_state):
     line(""),
     border(),
     sep='\n')
+
+  time.sleep(.800)
+
+#-----------------------------------------------------------------------

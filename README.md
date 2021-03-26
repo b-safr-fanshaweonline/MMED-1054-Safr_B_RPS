@@ -8,3 +8,7 @@ A virtual version of rock paper scissors! Two players compete by choosing an opt
 ## Project Roadmap File
 
 [Project roadmap Google Doc link](https://docs.google.com/document/d/15gKnuETX0Z-GodusE8Luvbn65flAFX-6kmnsh3VmR3o/edit?usp=sharing)
+
+## 0.0.0
+
+In class build.

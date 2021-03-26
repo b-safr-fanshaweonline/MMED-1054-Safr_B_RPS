@@ -1,11 +1,11 @@
-def roundWinner(player_choice,computer_choice):
+def winner(player_choice,computer_choice):
   # return:
   # 0 = computer wins
   # 1 = player wins
   # 2 = tie game
 
   # assume a tie game
-  win_state = 2
+  winner = 2
 
   # DETERMINE WINNER
 
@@ -19,12 +19,12 @@ def roundWinner(player_choice,computer_choice):
     
     # and player is paper
     if (player_choice == 2):
-      win_state = 1
+      winner = 1
       # player wins
 
     # unless player is scissors
     elif (player_choice == 3):
-      win_state = 0
+      winner = 0
       # computer wins
 
   # or, if computer is paper
@@ -32,12 +32,12 @@ def roundWinner(player_choice,computer_choice):
     
     # and player is scissors
     if (player_choice == 3):
-      win_state = 1
+      winner = 1
       # player wins
 
     # unless player is rock
     elif (player_choice == 1):
-      win_state = 0
+      winner = 0
       # computer wins
 
   # or, if computer is scissors
@@ -45,12 +45,12 @@ def roundWinner(player_choice,computer_choice):
     
     # and player is rock
     if (player_choice == 1):
-      win_state = 1
+      winner = 1
       # player wins
 
     # unless player is paper
     elif (player_choice == 2):
-      win_state = 0
+      winner = 0
       # computer wins
 
-  return win_state
+  return winner

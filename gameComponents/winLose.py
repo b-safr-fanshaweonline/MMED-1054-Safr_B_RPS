@@ -1,28 +1,56 @@
-from gameComponents import gameVars
+def roundWinner(player_choice,computer_choice):
+  # return:
+  # 0 = computer wins
+  # 1 = player wins
+  # 2 = tie game
 
-# define a win / lose function and refer to it (invoke it) in our game loop
-def winorlose(status):
-    if status == "won":
-        pre_message = "You are the huuuuuuugest winner ever! "
-    else:
-        pre_message = "You done trumped it, loser! "
+  # assume a tie game
+  win_state = 2
 
-    print(pre_message + 'Would you like to play again?')
+  # DETERMINE WINNER
 
-    choice = False
+  # computer makes random choice
+  # 1 = rock
+  # 2 = paper
+  # 3 = scissors
 
-    while choice == False:
-        choice = input("Y / N? ")
+  # if computer is rock
+  if (computer_choice == 1):
+    
+    # and player is paper
+    if (player_choice == 2):
+      win_state = 1
+      # player wins
 
-        if choice == "Y" or choice == "y":
-            # reset the game loop and start over again
-            gameVars.player_lives = gameVars.total_lives
-            gameVars.computer_lives = gameVars.total_lives
-            gameVars.player_choice = False
-        elif choice == "N" or choice == "n":
-            # exit message and quit
-            print("You chose to quit. Better luck next time!")
-            exit()
-        else:
-            print("Make a valid choice - Y or N")
-            choice = False
+    # unless player is scissors
+    elif (player_choice == 3):
+      win_state = 0
+      # computer wins
+
+  # or, if computer is paper
+  elif (computer_choice == 2):
+    
+    # and player is scissors
+    if (player_choice == 3):
+      win_state = 1
+      # player wins
+
+    # unless player is rock
+    elif (player_choice == 1):
+      win_state = 0
+      # computer wins
+
+  # or, if computer is scissors
+  elif (computer_choice == 3):
+    
+    # and player is rock
+    if (player_choice == 1):
+      win_state = 1
+      # player wins
+
+    # unless player is paper
+    elif (player_choice == 2):
+      win_state = 0
+      # computer wins
+
+  return win_state

@@ -10,7 +10,7 @@ Re-factoring patch.
 
 ## 1.0.0
 
-Brendan's rebuild :)
+Rebuild.
 
 ## 0.0.0
 

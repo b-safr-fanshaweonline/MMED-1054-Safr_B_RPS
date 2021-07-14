@@ -1,11 +1,6 @@
 # Rock Paper Scissors Game
 
-Hey Tina,
-
-I thought the while loop was a little unstable so I rewrote the game using a more functional method :)
-
-
-## Virtual Rock Paper Scissors Game!
+Virtual Rock Paper Scissors Game!
 
 A virtual version of rock paper scissors! The player and compete by choosing an option and comparing their choices. The game is win, lose, or draw - the loser loses a life. Keep playing until one player has no lives left to live.
 
